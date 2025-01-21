@@ -1,4 +1,4 @@
-\documentclass[11pt, letterpaper, notitlepage]{Article}
+\documentclass[11pt, letterpaper, notitlepage]{article}
 \usepackage[utf8]{inputenc}
 \usepackage{amsmath}
 \usepackage{amsfonts}
@@ -35,36 +35,57 @@
 
 \begin{abstract}
 
-   Dota 2 is a multiplayer online battle arena (MOBA) game where players can communicate in chat logs  with other players on their team (and possibly on the other team). Communications between players can be either positive or negative, regardless of team affiliation. We wish to categorize messages into different types: toxic messages, positive messages, casual chat (unrelated to the game), cooperative chat (informative and neutral). We'll break toxicity down further into verbal base, hate speech/offensive language, and negative attitude. Thus, we have a single-label classification task with 6 classes.
-   
-   Many multiplayer games with chat functionalities have auto-moderation systems put into place to prevent and reduce negativity among players. Many times, looking for profanity in messages may not be a solution for games targeting older audiences and instead need a more sophisticated way of detecting vulgar and ill-intended messages. Additionally, context of messages may turn an initially negative sounding comment positive, and vice-versa.
-   
+    %    Dota 2 is a multiplayer online battle arena (MOBA) game where players can communicate in chat logs  with other players on their team (and possibly on the other team). Communications between players can be either positive or negative, regardless of team affiliation. We wish to categorize messages into different types: toxic messages, positive messages, casual chat (unrelated to the game), cooperative chat (informative and neutral). We'll break toxicity down further into verbal base, hate speech/offensive language, and negative attitude. Thus, we have a single-label classification task with 6 classes.
+
+    %    Many multiplayer games with chat functionalities have auto-moderation systems put into place to prevent and reduce negativity among players. Many times, looking for profanity in messages may not be a solution for games targeting older audiences and instead need a more sophisticated way of detecting vulgar and ill-intended messages. Additionally, context of messages may turn an initially negative sounding comment positive, and vice-versa.
+
+    Dota 2 is a multiplayer online battle arena (MOBA) game where players can communicate via chat logs with teammates and, in some cases, players on the opposing team. These communications can range from positive and encouraging to negative and disruptive, regardless of team affiliation. We aim to categorize messages into four types: toxic messages, positive messages, casual chat (unrelated to gameplay), and cooperative chat (informative and neutral). Toxicity is further divided into three subcategories: verbal abuse, hate speech/offensive language, and negative attitudes. This creates a single-label classification task with six distinct classes.
+
+    Many multiplayer games with chat functionality implement auto-moderation systems to reduce negativity among players. However, simply detecting profanity is often insufficient for games targeting older audiences, as it fails to address subtler forms of toxicity. Additionally, message context can significantly alter interpretation. An initially negative-sounding comment might be meant positively, and vice versa. A more sophisticated approach is necessary to accurately detect and categorize player communications.
+
 \end{abstract}
-   
+
 \newpage
-   
+
 \section[1]{Data}
 
-	We will use the following Kaggle dataset which contains over 20 million chat messages across over a million Dota 2 matches: 
-	
+We will use the following Kaggle dataset which contains over 20 million chat messages across over a million Dota 2 matches:
+
 \begin{center}
-\href{https://www.kaggle.com/datasets/romovpa/gosuai-dota-2-game-chats}{https://www.kaggle.com/datasets/roovpa/gosuai-dota-2-game-chats}
+    \href{https://www.kaggle.com/datasets/romovpa/gosuai-dota-2-game-chats}{GOSU.AI Dota 2 Game Chats
+    }
 \end{center}
-	
-	The data contains four pieces of information: a match ID that the message corresponds to, the time the message was sent within the game (measured in seconds), the player ID (of the match) where the message came from, and the message itself. We will classify the message, possibly using context of the other columns as well as context from preceding and/or proceeding messages.
-	
-	We will not use the entire dataset, as this will would be a laborious and time-consuming annotation process. We will take somewhere from 5k-20k messages depending on how laborious the annotation process is.
-	
-	Additionally, many messages are in Russian. We may attempt to use a translator prior to annotation, as some games include messages from both English and Russian players (resulting in interesting data of how they may communicate), however we may also exclude these messages from the data due to the many game-specific terms that players use that may impact the translation accuracy.
- 	
-	The data was gathered by an individual external to Dota 2 and Valve. Collection methods of the data was not included, nor is a license of the data. We will credit individuals as needed. The data does not have any labels attached to it.
-	
-	We additionally found the Kaggle notebook below which utilized the same dataset we're using. It will be interesting to compare how our approaches to classifying messages will compare to theirs, and how the accuracy/output will differ.
-	
+
+% The data contains four pieces of information: a match ID that the message corresponds to, the time the message was sent within the game (measured in seconds), the player ID (of the match) where the message came from, and the message itself. We will classify the message, possibly using context of the other columns as well as context from preceding and/or proceeding messages.
+
+% We will not use the entire dataset, as this will would be a laborious and time-consuming annotation process. We will take somewhere from 5k-20k messages depending on how laborious the annotation process is.
+
+% Additionally, many messages are in Russian. We may attempt to use a translator prior to annotation, as some games include messages from both English and Russian players (resulting in interesting data of how they may communicate), however we may also exclude these messages from the data due to the many game-specific terms that players use that may impact the translation accuracy.
+
+% The data was gathered by an individual external to Dota 2 and Valve. Collection methods of the data was not included, nor is a license of the data. We will credit individuals as needed. The data does not have any labels attached to it.
+
+% We additionally found the Kaggle notebook below which utilized the same dataset we're using. It will be interesting to compare how our approaches to classifying messages will compare to theirs, and how the accuracy/output will differ.
+
+The dataset contains four key attributes: a match ID corresponding to the message, the time the message was sent within the game (in seconds), the player ID associated with the message, and the message content itself. Classification will focus on a single message, but contextual information from other attributes and surrounding messages may be used to support the classification of that message.
+
+Due to the labor-intensive nature of annotation, we will work with a subset of the data, selecting between 5,000 and 20,000 messages depending on the effort required.
+
+A significant portion of the messages are in Russian. To address this, we may use a translator before annotation, as many matches feature both English and Russian players. This creates interesting data on cross-language communication. However, we may exclude Russian messages if translation inaccuracies arise due to game-specific terms.
+
+The dataset was collected by an individual unaffiliated with Dota 2 or Valve. It lacks information about the collection process, licensing details, or pre-existing labels. Proper credit will be provided as necessary.
+
+Additionally, we identified a Kaggle notebook that uses the same dataset. Comparing our classification methods and results to theirs will offer insights into differing approaches and their respective outcomes.
+
+% \begin{center}
+%     \href{https://www.kaggle.com/code/adelsondias/introduction-of-zero-shot-classification-w-chats}{https://www.kaggle.com/code/adelsondias/introduction-of-zero-shot-classification-w-chats}
+% \end{center}
+
 \begin{center}
-\href{https://www.kaggle.com/code/adelsondias/introduction-of-zero-shot-classification-w-chats}{https://www.kaggle.com/code/adelsondias/introduction-of-zero-shot-classification-w-chats}
+    \href{https://www.kaggle.com/code/adelsondias/introduction-of-zero-shot-classification-w-chats}{Introduction of Zero-Shot Classification with Chats}
 \end{center}
- 	
+
+
+
 \subsection{Example 1}
 
 Message: why all russian are so dirty player\\
@@ -78,49 +99,75 @@ Category: Negative Attitude
 \subsection{Example 3}
 
 Message: gg\\
-Category: Positive Message (if said at the end of a game), Negative Attitude (if said in the start/middle of a game). Good example of ambiguity depending on context.
+Category: Positive Message (if said at the end of a game), Negative Attitude (if said in the start/middle of a game). This demonstrates ambiguity depending on the context.
+
+% Good example of ambiguity depending on context.
 
 \newpage
 
 \section[2]{Team Contract}
 
-As a team, we hope to create an interesting classification tool that has real-life applications in live-service cooperative/competitive games and learn about NLP throughout the process. We will also ensure that this is an enjoyable and informative process.
+% As a team, we hope to create an interesting classification tool that has real-life applications in live-service cooperative/competitive games and learn about NLP throughout the process. We will also ensure that this is an enjoyable and informative process.
+
+This project has real-life applications in live-service cooperative/competitive games and provides an opportunity to deepen our understanding of natural language processing (NLP). We will ensure this process is both enjoyable and informative.
 
 \subsection{Team Responsibilities}
 
-As a team, we will \textit{all}: 
+% As a team, we will \textit{all}:
+% \begin{itemize}[noitemsep, nolistsep]
+%     \item collaborate and participate at \textit{all} stages of this project;
+%     \item complete group tasks in a \textit{timely}* manner;
+%     \item make decisions with unanimous consent*;
+%     \item truthfully disclose C02 emissions due to generative AI and attempt to keep it to a minimum;
+%     \item abide by McMaster's and this course's academic integrity policy;
+%     \item and have fun.
+% \end{itemize}
+
+As a team, we will \textit{all}:
 \begin{itemize}[noitemsep, nolistsep]
-\item collaborate and participate at \textit{all} stages of this project;
-\item complete group tasks in a \textit{timely}* manner;
-\item make decisions with unanimous consent*;
-\item truthfully disclose C02 emissions due to generative AI and attempt to keep it to a minimum;
-\item abide by McMaster's and this course's academic integrity policy;
-\item and have fun.
+    \item collaborate and actively participate in \textit{all} stages of the project;
+    \item complete group tasks in a \textit{timely}* manner;
+    \item make decisions with unanimous consent*;
+    \item minimize and truthfully disclose CO2 emissions resulting from the use of generative AI;
+    \item abide by McMaster University's and this course's academic integrity policy;
+    \item and have fun.
 \end{itemize}
 
 \subsection{Team Member Responsibilities}
 
-As an individual, we will \textit{all}:
+% As an individual, we will \textit{all}:
+% \begin{itemize}[noitemsep, nolistsep]
+%     \item ensure completion of assigned individual tasks in a \textit{timely}* manner;
+%     \item \textit{not} deviate from assigned task without consulting other team members;
+%     \item truthfully disclose C02 emissions due to generative AI to team members and attempt to keep it to a minimum;
+%     \item consult team members when confused or need assistance.
+% \end{itemize}
+
+As an individual, we will \textit{each}:
 \begin{itemize}[noitemsep, nolistsep]
-\item ensure completion of assigned individual tasks in a \textit{timely}* manner;
-\item \textit{not} deviate from assigned task without consulting other team members;
-\item truthfully disclose C02 emissions due to generative AI to team members and attempt to keep it to a minimum; 
-\item consult team members when confused or need assistance.
+    \item ensure assigned tasks are completed in a \textit{timely}* manner;
+    \item \textit{not} deviate from assigned task without consulting the team;
+    \item minimize and truthfully disclose CO2 emissions resulting from the use of generative AI;
+    \item seek clarification or assistance from team members when needed.
 \end{itemize}
 
 \subsection{Leadership and Management of Group Activities}
 
-Any decisions related directly to the project will be decided and agreed upon by the entire group. This includes  initial project ideation, deciding software stack/NLP methods, and report write-ups.
+% Any decisions related directly to the project will be decided and agreed upon by the entire group. This includes  initial project ideation, deciding software stack/NLP methods, and report write-ups.
 
-Any administrative/miscellaneous activities will be handled by Richie Motorgeanu. This includes internal due dates, communication channels/meetings, and task allocation.
+% Any administrative/miscellaneous activities will be handled by Richie Motorgeanu. This includes internal due dates, communication channels/meetings, and task allocation.
+
+All project decisions will be made collectively by the group, including initial ideation, software stack and NLP method selection, and report preparation. Administrative and miscellaneous tasks, such as managing internal deadlines, organizing communication channels and meetings, and allocating tasks, will be handled by Richard Motorgeanu.
 
 \subsection{Resolving Disagreements*}
 
-In the case that a decision cannot immediately be made unanimously, we will consider arguments to why we should choose choice over another.
+% In the case that a decision cannot immediately be made unanimously, we will consider arguments to why we should choose choice over another.
 
-If no unanimous decision can be made after an attempt to sort it out as a team, we will consult Dr. Charles Welch to provide guidance and a possible resolution.
+% If no unanimous decision can be made after an attempt to sort it out as a team, we will consult Dr. Charles Welch to provide guidance and a possible resolution.
 
-In the case that Dr. Charles Welch cannot assist and/or is not available in a timely manner*, the final decision will go to the majority vote. In the case of a stalemate (3-way tie), we do rock paper scissors.
+% In the case that Dr. Charles Welch cannot assist and/or is not available in a timely manner*, the final decision will go to the majority vote. In the case of a stalemate (3-way tie), we do rock paper scissors.
+
+If a decision cannot be reached unanimously, we will encourage productive dialogue to arrive at a resolution. If no decision is made within a \textit{timely}* manner, we will consult Dr. Charles Welch for guidance and a suggested resolution. If Dr. Charles Welch is unavailable or unable to assist in a \textit{timely}* manner, the decision will be determined by majority vote. In the case of a three-way tie, a random selection method, such as rock-paper-scissors, will be used.
 
 \subsection{Communication}
 
@@ -128,9 +175,10 @@ Communications will be done in person when convenient. Online communications wil
 
 \subsection{Miscellaneous}
 
-\textit{Timely} may mean different things to different people. In this contract, \textit{timely} defaults to 24 hours if no other deadline is immediately presented/requested.
+\textit{Timely} may have conflicting definitions. In this contract, \textit{timely} refers to 24 hours if no other deadline is immediately presented.
 
-This project proposal and contract was made without the assistance of generative AI at any point.
+This project proposal and contract was made with the assistance of generative AI to allow for better clarity and minimization of the ambigious  language of this document. 5 prompts to ChatGPT were made, totalling to 21.6g of C02 emmisions.
+
 
 
 \newpage
@@ -141,9 +189,9 @@ This project proposal and contract was made without the assistance of generative
 
 Team Member 1:
 \begin{align*}
-&\text{Print Name:} &\text{\underline{\hspace{7cm}}}\\[0.5em]
-&\text{Date:} &\text{\underline{\hspace{7cm}}}\\[0.5em]
-&\text{Signature:} &\text{\underline{\hspace{7cm}}}
+     & \text{Print Name:} & \text{\underline{\hspace{7cm}}} \\[0.5em]
+     & \text{Date:}       & \text{\underline{\hspace{7cm}}} \\[0.5em]
+     & \text{Signature:}  & \text{\underline{\hspace{7cm}}}
 \end{align*}
 
 \vspace{1em}\hrule\vspace{1em}
@@ -151,9 +199,9 @@ Team Member 1:
 \noindent
 Team Member 2:
 \begin{align*}
-&\text{Print Name:} &\text{\underline{\hspace{7cm}}}\\[0.5em]
-&\text{Date:} &\text{\underline{\hspace{7cm}}}\\[0.5em]
-&\text{Signature:} &\text{\underline{\hspace{7cm}}}
+     & \text{Print Name:} & \text{\underline{\hspace{7cm}}} \\[0.5em]
+     & \text{Date:}       & \text{\underline{\hspace{7cm}}} \\[0.5em]
+     & \text{Signature:}  & \text{\underline{\hspace{7cm}}}
 \end{align*}
 
 \vspace{1em}\hrule\vspace{1em}
@@ -161,9 +209,9 @@ Team Member 2:
 \noindent
 Team Member 3:
 \begin{align*}
-&\text{Print Name:} &\text{\underline{\hspace{7cm}}}\\[0.5em]
-&\text{Date:} &\text{\underline{\hspace{7cm}}}\\[0.5em]
-&\text{Signature:} &\text{\underline{\hspace{7cm}}}
+     & \text{Print Name:} & \text{\underline{\hspace{7cm}}} \\[0.5em]
+     & \text{Date:}       & \text{\underline{\hspace{7cm}}} \\[0.5em]
+     & \text{Signature:}  & \text{\underline{\hspace{7cm}}}
 \end{align*}
 
 \vspace{1em}\hrule\vspace{1em}
@@ -171,9 +219,9 @@ Team Member 3:
 \noindent
 Professor:
 \begin{align*}
-&\text{Print Name:} &\text{\underline{\hspace{7cm}}}\\[0.5em]
-&\text{Date:} &\text{\underline{\hspace{7cm}}}\\[0.5em]
-&\text{Signature:} &\text{\underline{\hspace{7cm}}}
+     & \text{Print Name:} & \text{\underline{\hspace{7cm}}} \\[0.5em]
+     & \text{Date:}       & \text{\underline{\hspace{7cm}}} \\[0.5em]
+     & \text{Signature:}  & \text{\underline{\hspace{7cm}}}
 \end{align*}
 
 \vspace{1em}\hrule\vspace{1em}
