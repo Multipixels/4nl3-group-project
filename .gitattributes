@@ -1,2 +1,4 @@
 data_cleaning/cleaned_dota2_messages.csv filter=lfs diff=lfs merge=lfs -text
 data_cleaning/dota2_chat_messages.csv filter=lfs diff=lfs merge=lfs -text
+filtered_output2.csv filter=lfs diff=lfs merge=lfs -text
+dota2_chat_messages.csv filter=lfs diff=lfs merge=lfs -text
