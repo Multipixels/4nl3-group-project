@@ -1,2 +1,2 @@
-1-annotation-setup/data/filtered_output2.csv filter=lfs diff=lfs merge=lfs -text
+1-annotation-setup/data/filtered_output_1.csv filter=lfs diff=lfs merge=lfs -text
 1-annotation-setup/data/dota2_chat_messages.csv filter=lfs diff=lfs merge=lfs -text
