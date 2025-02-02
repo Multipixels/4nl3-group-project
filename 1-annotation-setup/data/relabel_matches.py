@@ -9,6 +9,7 @@ def main():
     newGameId = -1
     print(df.index)
     counter = 0
+
     for index, row in df.iterrows():
         if (counter > 100000): break
         if row["match"] != gameId: 
