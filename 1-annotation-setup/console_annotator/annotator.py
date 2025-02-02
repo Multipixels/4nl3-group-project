@@ -49,7 +49,7 @@ def getPlayerMessage(game, nameIds, messageNumber):
 
 def main():
     # Read my data file
-    with open('final_data.json') as data:
+    with open('input_data.json') as data:
         my_data = json.load(data)
 
     # Make sure I don't overwrite anything!
