@@ -68,9 +68,13 @@ def main():
         if counter < some_random: 
             counter +=1
             continue
+
+        last_message_time = my_data[game][-1]['time']
+        last_message_time_string = f"{(int(last_message_time)//60):1}:{int(last_message_time)%60:02}"
+
         for i in range(len(my_data[game])):
             print(delimiter)
-            print(f"Game {game} - Message ({i+1}/{len(my_data[game])})")
+            print(f"Game {game} - Message ({i+1}/{len(my_data[game])}) - Last Message Time: {last_message_time_string}")
             random.seed(game)
             nameIds = []
             for j in range(10):
