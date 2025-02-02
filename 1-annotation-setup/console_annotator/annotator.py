@@ -27,7 +27,7 @@ labels = ["Positive", "Casual", "Cooperative", "Negative Attitude", "Hate Speech
 
 data_col = "text"
 
-delimiter = "="*20
+delimiter = "="*60
 
 names = ["Alice", "Bob", "Chad", "Dave", "Eve", 
          "Frank", "Grace", "Hettie", "Ivan", "Judy", 
@@ -36,8 +36,12 @@ names = ["Alice", "Bob", "Chad", "Dave", "Eve",
          "Ursula", "Victor", "Walt", "Xavier", "Yanny", 
          "Zoe"]
 
+
 def getPlayerMessage(game, nameIds, messageNumber):
-    time = f"{int(game[messageNumber]['time']//60):1}:{int(game[messageNumber]['time'])%60:02}"
+    seconds = (int(game[messageNumber]['time'] % 60))
+    if int(game[messageNumber]['time'])< 0:
+        seconds = 60 - seconds
+    time = f"{int(game[messageNumber]['time']//60):1}:{seconds:02}"
     player = game[messageNumber]['slot']
     text = game[messageNumber]['text']
 
@@ -49,30 +53,31 @@ def main():
         my_data = json.load(data)
 
     # Make sure I don't overwrite anything!
-    out_count = 0
-    my_file = Path("output" + str(out_count) + ".json")
-    while my_file.is_file():
-        out_count += 1
-        my_file = Path("output" + str(out_count) + ".json")
+    startingGameId = 0
+    my_file = Path("output_for_dota_project.json")
+    if my_file.is_file():
+        with open(my_file, "r") as the_data:
+            the_json_data = json.load(the_data)
+            for game in the_json_data:
+                startingGameId = max(startingGameId, int(game)+1)
 
     print(instructions)
 
     input("Press ENTER when you are ready to proceed.")
     print()
 
-    some_random = random.randint(0, 1000)
-    counter = 0
-
     # Loop over data and request labels
+    all_data = {}
     for game in my_data:
-        if counter < some_random: 
-            counter +=1
+        if(int(game) < startingGameId):
             continue
 
+        game_data = []
         last_message_time = my_data[game][-1]['time']
         last_message_time_string = f"{(int(last_message_time)//60):1}:{int(last_message_time)%60:02}"
 
         for i in range(len(my_data[game])):
+            message_data = {}
             print(delimiter)
             print(f"Game {game} - Message ({i+1}/{len(my_data[game])}) - Last Message Time: {last_message_time_string}")
             random.seed(game)
@@ -83,9 +88,9 @@ def main():
                     a = random.randint(0,25)
                 nameIds.append(a)
 
-            for j in range(i-5,i+1):
+            for j in range(i-5,i+5):
                 if j < 0: print(); continue
-                if j >= len(my_data[game]): continue
+                if j >= len(my_data[game]): print(); continue
                 if j == i: print("--> ", end="") 
                 else: print("    ", end="")
                 print(getPlayerMessage(my_data[game], nameIds, j))
@@ -96,13 +101,25 @@ def main():
             label = input("Your label: ") 
             while(label not in ["0", "1", "2", "3", "4", "5", "6", "7"]):
                 label = input("Please enter a valid label from 0 to 7: ")
+            
+            message_data["time"] = my_data[game][i]["time"]
+            message_data["slot"] = my_data[game][i]["slot"]
+            message_data["text"] = my_data[game][i]["text"]
+            message_data["label"] = label
+            game_data.append(message_data)
 
             print(); print(); print(); print(); print(); print(); print(); print(); print(); print(); print(); print()
 
-        
-        # Open and close the file so that if you accidentally close the terminal you don't lose everything
-        # with open(my_file, "a") as handle:
-        #     handle.write(str(index) + "," + str(label) + "\n")
+        all_data[str(game)] = game_data
+        # Saving
+        if(my_file.is_file()):
+            with open(my_file, "r") as outfile: 
+                data = json.load(outfile)
+            all_data = data | all_data
+            
+        with open(my_file, "w") as outfile: 
+            json.dump(all_data, outfile, indent = 4)
+
 
 
 
