@@ -6,6 +6,65 @@
 \usepackage{mathtools}
 \usepackage{setspace}
 \usepackage{enumitem}
+\usepackage[normalem]{ulem}
+\useunder{\uline}{\ul}{}
+
+% -- Defining colors:
+\usepackage[dvipsnames]{xcolor}
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+
+\usepackage{listings}
+
+\lstdefinestyle{mystyle}{
+    backgroundcolor=\color{backcolour},   
+    commentstyle=\color{codepurple},
+    keywordstyle=\color{NavyBlue},
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codepurple},
+    basicstyle=\ttfamily\footnotesize\bfseries,
+    breakatwhitespace=false,         
+    breaklines=true,                 
+    captionpos=t,                    
+    keepspaces=true,                 
+    numbers=left,                    
+    numbersep=5pt,                  
+    showspaces=false,                
+    showstringspaces=false,
+    showtabs=false,                  
+    tabsize=2
+}
+
+% Python style for highlighting
+\newcommand\pythonstyle{\lstset{
+  style=mystyle,
+  framexleftmargin=3.5mm,
+  frame=shadowbox,
+  rulesepcolor=\color{black},
+  linewidth=1\linewidth,
+  xleftmargin=12pt,
+  aboveskip=12pt,
+  belowskip=12pt,
+  breakatwhitespace=false,
+  language=Python,
+}
+}
+
+\lstnewenvironment{python}[1][]
+{
+\pythonstyle
+\lstset{#1}
+}
+{}
+
+\newcommand\pythonexternal[2][]{{
+\pythonstyle
+\lstinputlisting[#1]{#2}}}
+
+% Python for inline
+\newcommand\pythoninline[1]{{\pythonstyle\lstinline!#1!}}
 
 \renewcommand{\abstractname}{Overview}
 
@@ -43,22 +102,169 @@
 
 \section[1]{Overview}
 
-A concise overview of the annotator’s job
+The annotator's job is to give each message provided a label based on the guidelines presented below.
+This will be done by running the file \textit{annotator.py} in which the annotator will have 7 labels to choose from before moving on to the next message.
+
+These messages have been split up into individual games, where the annotator can see the current game they're labeling, how many messages are in the game, and the time the last message was sent in the game.
+Each player in the game is assigned a random name to easily keep track of players and their random name, message and time of message sent is given to the annotator.
+The annotator is also able to see the 5 preceeding and subsequent messages in order to understand the context in which the message was sent.
+
+After the annotator has put a label for every message in a game, that game along with the labels will be saved to \textit{input\_data.json} and the annotator will be able to quit the annotation return to annotating anytime after this without risking losing data.
+The annotator is expected to annotate 30 games (through testing we have found that this is roughly 1 hour of work) with each game having around 19 messages, however this number may vary.
+
+\vspace{2em}
+
+\textbf{Sample Output:}
+\begin{python}
+============================================================
+Game 0 - Message (1/16) - Last Message Time: 37:46
+--> [20:38] Hettie: carry
+    [20:48] Laurel: yes dog
+    [20:53] Hettie: lul
+    [21:21] Dave: HAHAH
+    [25:59] Laurel: yeah 
+
+(0) Positive (1) Casual (2) Cooperative (3) Negative Attitude (4) Hate Speech/Offensive Language (5) Verbal Abuse (6) Miscellaneous (7) Not English.
+Your label: 
+\end{python}
 
 \newpage
 
 \section[2]{Annotation Guidelines}
 
-The set of labels that can be applied with descriptions of their meaning (for each item in a
-numeric scale, or for each class)
+\subsection{Labels}
+\begin{table}[h]
+    \begin{tabular}{p{0.25\linewidth} | p{0.6\linewidth}}
+        \hline
+    Positive                       & Messages that contain compliments, good sportmanship, congratulations, and focuses on the good parts of the game.                         \\ \hline
+    Casual                         & Messages that are not related or off-topic to the game that are neither positive or negative.                                             \\ \hline
+    Cooperative                    & Messages that are on-topic about the game that are neither positive or negative.                                                          \\ \hline
+    Negative Attitude              & Messages that contain giving up, attempting to hurt their own team, cursing, poor sportmanship, and focuses on the bad parts of the game. \\ \hline
+    Hate Speech / Offensive Language & Hateful messages towards individuals/groups related to their sexuality, religion, gender, and often containing slurs.                     \\ \hline
+    Verbal Abuse                   & Hateful messages targeted towards an individual in the game which differs from above.                                                     \\ \hline
+    Miscellaneous                  & Any message that doesn't fall into the above categories       \\      \hline
+    Non-English                    & Messages that cannot be labeled since they're not in english \\                                                                       
+    \hline                                                                                                                              
+    \end{tabular}
+    \end{table}
 
-Unambiguous rules or criteria that should be followed in order to label the data (what is the
-thinking process you should go through to label the data)
+When annotating, the annotators should ask questions like "Is this message positive in the given context?", "Is this casual or is this player giving strategy",
+"Is this non-english or is that phrase gamer slang/mispelled?" in order to narrow down a label. It is recommended to read through the following page on 
+\href{http://dota2freaks.com/glossary/}{Dota 2 slang} before annotating.
+
+\newpage
 
 \subsection{Examples}
 
-At least 1 example of each label along with an explanation for why that is the correct label
-(and if helpful, why the other labels would not apply to that instance)
+
+\begin{python}
+ =================================================
+Game 0 - Message (8/16) - Last Message Time: 37:46
+    [20:53] Hettie: lul
+    [21:21] Dave: HAHAH
+    [25:59] Laurel: yeah 
+    [26:03] Laurel: fast and furious
+    [29:17] Laurel: too fas
+--> [33:16] Bob: idiot drow
+    [33:26] Ivan: no idiot
+    [33:29] Ivan: we too pro
+    [33:36] Laurel: haha
+    [37:42] Laurel: sad
+\end{python}
+Verbal Abuse as we see Bob calling another player an idot and to drown (mispelled) themselves, which is hateful towards that individual, but not hate speech.
+\vspace{2em}
+
+\begin{python}
+============================================================
+Game 0 - Message (13/16) - Last Message Time: 37:46
+        [33:16] Bob: idiot drow
+        [33:26] Ivan: no idiot
+        [33:29] Ivan: we too pro
+        [33:36] Laurel: haha
+        [37:42] Laurel: sad
+    --> [37:42] Michael: fkasjfoiashnfiplwqjdf80q23iwkm d123q
+        [37:43] Ivan: lol
+        [37:43] Dave: COMMEND ME TY
+        [37:46] Dave: EZ
+\end{python}
+Non-english, a random key-spam of letters that we would not be able to use.
+\newpage
+
+\begin{python}
+    ============================================================
+    Game 2 - Message (18/37) - Last Message Time: 42:11
+        [4:07] Laurel: i killed u 
+        [6:54] Ursula: WORST HOOK IN HISTORY
+        [7:04] Rupert: ur not even a good hooker kid
+        [10:20] Laurel: almost 
+        [10:26] Ursula: YOU THOUGHT
+    --> [10:31] Ursula: IM THE #1 ROAMER NA
+        [14:34] Ursula: STUPIDD PIUDGE
+        [14:36] Ursula: STUPID!
+        [15:15] Hettie: ?
+        [17:52] Kyle: report!!!!!!!!!!!!!!!!!@!!!!!!!~!!!!!!!!!!!!!!~!
+    \end{python}
+    Negative Attitude as we see Ursula displaying poor sportmanship towards their fellow teamates.
+    \vspace{2em}
+
+\begin{python}
+============================================================
+Game 2 - Message (27/37) - Last Message Time: 42:11
+    [17:52] Kyle: report!!!!!!!!!!!!!!!!!@!!!!!!!~!!!!!!!!!!!!!!~!
+    [18:14] Ursula: nice ult medusa
+    [18:15] Ursula: commended
+    [18:22] Ursula: DOWNYS  GET DUMKED
+    [28:32] Rupert: passive shadow blade?
+--> [37:59] Kyle: what is the best soup?
+    [38:27] Laurel: gg
+    [41:23] Ursula: ez game
+    [41:24] Ursula: Ty ty 
+    [42:05] Rupert: gg
+    \end{python}
+    Casual as we see Kyle attempting to drum up some small talk with the players in their game (however they are very much ignored).
+\newpage
+
+\begin{python}
+============================================================
+Game 3 - Message (3/8) - Last Message Time: 29:54
+
+
+
+    [-2:42] Bob: nice random ... lol
+    [19:59] Oscar: ?
+--> [22:29] Xavier: PUSH
+    [22:37] Xavier: not defending
+    [26:22] Xavier: dodger lc
+    [29:07] Xavier: swap commend ty
+    [29:52] Oscar: UPS
+\end{python}
+Cooperative as we see Xavier using the slang "push" letting their teamates know to focus on attacking instead of defending in that moment.
+\vspace{2em}
+
+\begin{python}
+============================================================
+Game 5 - Message (1/1) - Last Message Time: 29:00
+
+
+
+
+
+--> [29:00] Hettie: GG
+\end{python}
+Positive as Hettie (begins) and ends the game with the slang "gg" meaning "good game".
+\vspace{2em}
+
+\begin{python}
+============================================================
+Game 9 - Message (2/2) - Last Message Time: 29:29
+    
+    
+    
+    
+    [28:27] Alice: GG
+--> [29:29] Xavier: WELL PLAYED SHIT CUNTS
+\end{python}
+Hate Speech / Offensive Language as Xavier is refering to others in their game as the derogatory term "cunts".
 
 \newpage
 
