@@ -32,7 +32,7 @@ Given an average annotation time of 6 seconds per message, we've selected the fi
 - `slot`: A match-specific user id of the player who sent the message. `slot` ranges from 0-9, where players 0-4 are on one team, and 5-9 are on the other team.
 - `text`: The message itself.
 
-# Annotator.py
+## Annotator.py
 
 In order to use this annotator tool, please do the following.
 
