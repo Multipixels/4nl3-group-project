@@ -4,7 +4,7 @@
 
 ## Raw Data
 
-Data Source: <https://www.kaggle.com/datasets/romovpa/gosuai-dota-2-game-chats> 
+Data Source: <https://www.kaggle.com/datasets/romovpa/gosuai-dota-2-game-chats>
 
 To access the data source, you can download it from the link above or use the command below:
 
@@ -17,6 +17,7 @@ Data was cleaned and reformatted it into a JSON format. Any games with foreign t
 Each gameID has a list of 1 or more messages.
 
 Each message has 3 fields.
+
 - `time`: The time in seconds that the message was sent from the start of the game. Negative time values are messages sent in the pre-game lobby (prior to a match starting).
 - `slot`: The id of the player who sent it (local to the game). Is a value from 0-9.
 - `text`: The message itself.
@@ -39,14 +40,14 @@ Given an average annotation time of 6 seconds per message, we've selected the fi
 
 In order to use this annotator tool, please do the following.
 
-1) Make sure to read the annotation guidelines.
-2) Copy your `data_x.json` data into `input_data.json`. Do not rename the data, keep it as `input_data.json`.
-3) Ensure you have pandas downloaded and installed. `pip install pandas`.
-4) Run the file by doing `python annotator.py`.
-5) Read through the initial instructions and click Enter.
-6) Type a number `0`, `1`, `2`, ... and so on based on they label you want to give the message.
+1. Make sure to read the annotation guidelines.
+2. Copy your `data_x.json` data into `input_data.json`. Do not rename the data, keep it as `input_data.json`.
+3. Ensure you have pandas downloaded and installed. `pip install pandas`.
+4. Run the file by doing `python annotator.py`.
+5. Read through the initial instructions and click Enter.
+6. Type a number `0`, `1`, `2`, ... and so on based on they label you want to give the message.
 
-Your progress is saved at the end of ever game. If you quit and come back, you'll start where you left off. If you made a mistake at any point, just make a note of it when providing the data back to us.
+Your progress is saved at the end of every game. If you quit and come back, you'll start where you left off. If you made a mistake at any point, just make a note of it when providing the data back to us.
 
 ## Additional Information
 
