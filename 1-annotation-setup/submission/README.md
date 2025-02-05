@@ -27,14 +27,6 @@ Given an average annotation time of 6 seconds per message, we've selected the fi
 
 `data/segments/verify.py` was used to verify message counts and duplicate message count.
 
-## How to use the Data
-
-`final_data.json` is a collection of chatlogs from 5151 games of Dota 2. These games are indexed from 0-5150, where each game consists of 0 or more messages. Each message has the following attributes:
-
-- `time`: The time (in seconds) that the message was sent relative to the start of the game. Messages that have a negative `time` value are messages that were sent in the pre-game lobby.
-- `slot`: A match-specific user id of the player who sent the message. `slot` ranges from 0-9, where players 0-4 are on one team, and 5-9 are on the other team.
-- `text`: The message itself.
-
 ## Annotator.py
 
 In order to use this annotator tool, please do the following.
@@ -53,3 +45,4 @@ Your progress is saved at the end of ever game. If you quit and come back, you'l
 - The raw Kaggle dataset was retrieved on January 31st, 2025, and it the dataset was last updated on Kaggle ~7 years ago (as of February 1st).
 - Games that included messages with non-ASCII characters were excluded to attempt to only keep English messages in the data.
 - To label a message, it takes roughly 6 seconds.
+- Two ChatGPT queries were used in the cleaning of this data, providing assistance with some template code for removing non-English characters. This resulted in 8.64g of C02 emmissions.
