@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 23.12) (preloaded format=pdflatex 2024.1.17)  8 MAR 2025 16:51
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 23.12) (preloaded format=pdflatex 2024.1.17)  8 MAR 2025 17:32
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -409,16 +409,26 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
 [1
 
-{C:/Users/RIC/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map}] [2] [3]
-(report.aux)
+{C:/Users/RIC/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map}]
+<frequency_plot.png, id=28, 454.69875pt x 338.01282pt>
+File: frequency_plot.png Graphic file (type png)
+<use frequency_plot.png>
+Package pdftex.def Info: frequency_plot.png  used on input line 65.
+(pdftex.def)             Requested size: 363.75949pt x 270.41061pt.
+
+Overfull \hbox (20.75949pt too wide) in paragraph at lines 65--66
+[][] 
+ []
+
+[2] [3 <./frequency_plot.png>] (report.aux)
 Package rerunfilecheck Info: File `report.out' has not changed.
 (rerunfilecheck)             Checksum: 9C325DD9C97A1E8FC020D63ADA36646A;192.
  ) 
 Here is how much of TeX's memory you used:
- 10163 strings out of 475386
- 165309 string characters out of 5777850
+ 10174 strings out of 475386
+ 165544 string characters out of 5777850
  510303 words of memory out of 5000000
- 31402 multiletter control sequences out of 15000+600000
+ 31412 multiletter control sequences out of 15000+600000
  476664 words of font info for 56 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  72i,6n,77p,544b,435s stack positions out of 10000i,1000n,20000p,200000b,200000s
@@ -429,9 +439,9 @@ amsfonts/cm/cmr10.pfb><C:/Users/RIC/AppData/Local/Programs/MiKTeX/fonts/type1/p
 ublic/amsfonts/cm/cmr12.pfb><C:/Users/RIC/AppData/Local/Programs/MiKTeX/fonts/t
 ype1/public/amsfonts/cm/cmr17.pfb><C:/Users/RIC/AppData/Local/Programs/MiKTeX/f
 onts/type1/public/amsfonts/cm/cmsy10.pfb>
-Output written on report.pdf (3 pages, 92268 bytes).
+Output written on report.pdf (3 pages, 113075 bytes).
 PDF statistics:
- 68 PDF objects out of 1000 (max. 8388607)
+ 71 PDF objects out of 1000 (max. 8388607)
  8 named destinations out of 1000 (max. 500000)
- 33 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 38 words of extra memory for PDF output out of 10000 (max. 10000000)
 
