@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 23.12) (preloaded format=pdflatex 2024.1.17)  8 MAR 2025 17:32
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 23.12) (preloaded format=pdflatex 2024.1.17)  8 MAR 2025 17:35
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -409,8 +409,8 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
 [1
 
-{C:/Users/RIC/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map}]
-<frequency_plot.png, id=28, 454.69875pt x 338.01282pt>
+{C:/Users/RIC/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map}] [2]
+<frequency_plot.png, id=34, 454.69875pt x 338.01282pt>
 File: frequency_plot.png Graphic file (type png)
 <use frequency_plot.png>
 Package pdftex.def Info: frequency_plot.png  used on input line 65.
@@ -420,7 +420,7 @@ Overfull \hbox (20.75949pt too wide) in paragraph at lines 65--66
 [][] 
  []
 
-[2] [3 <./frequency_plot.png>] (report.aux)
+[3 <./frequency_plot.png>] (report.aux)
 Package rerunfilecheck Info: File `report.out' has not changed.
 (rerunfilecheck)             Checksum: 9C325DD9C97A1E8FC020D63ADA36646A;192.
  ) 
@@ -439,7 +439,7 @@ amsfonts/cm/cmr10.pfb><C:/Users/RIC/AppData/Local/Programs/MiKTeX/fonts/type1/p
 ublic/amsfonts/cm/cmr12.pfb><C:/Users/RIC/AppData/Local/Programs/MiKTeX/fonts/t
 ype1/public/amsfonts/cm/cmr17.pfb><C:/Users/RIC/AppData/Local/Programs/MiKTeX/f
 onts/type1/public/amsfonts/cm/cmsy10.pfb>
-Output written on report.pdf (3 pages, 113075 bytes).
+Output written on report.pdf (3 pages, 113308 bytes).
 PDF statistics:
  71 PDF objects out of 1000 (max. 8388607)
  8 named destinations out of 1000 (max. 500000)
