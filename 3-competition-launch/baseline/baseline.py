@@ -45,7 +45,7 @@ def get_truth_data() -> pd.DataFrame:
 
 def split_data(df: pd.DataFrame):
     """Split the DataFrame into training and testing sets."""
-    return train_test_split(df["text"], df["label"], test_size=0.3, random_state=42)
+    return train_test_split(df["text"], df["label"], test_size=0.3)
 
 
 def vectorize_data(X_train, X_test):
@@ -73,7 +73,7 @@ def evaluate_baselines(X_train_vect, X_test_vect, y_train, y_test):
 
 def train_logistic_regression(X_train_vect, X_test_vect, y_train, y_test):
     """Train a Logistic Regression model and return its accuracy."""
-    lr_model = LogisticRegression(max_iter=1000)
+    lr_model = LogisticRegression()
     lr_model.fit(X_train_vect, y_train)
     y_pred_lr = lr_model.predict(X_test_vect)
     accuracy_lr = accuracy_score(y_test, y_pred_lr)
