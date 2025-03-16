@@ -13,17 +13,15 @@ def get_truth_data() -> pd.DataFrame:
 
     all_data = []
     for key, records in json_data.items():
-        for record in records:
-            record["conversation_id"] = key
-            all_data.append(record)
+        all_data.append(records)
 
-    df = pd.DataFrame(all_data)
+    df = pd.DataFrame(all_data, index=json_data.keys())
     return df
 
 
 def split_data(df: pd.DataFrame):
     """Randomly shuffle the DataFrame and split it into training, validation, and testing sets."""
-    train, validate, test = np.split(df.sample(frac=1, random_state=42),
+    train, validate, test = np.split(df.sample(frac=1, random_state=41),
                                      [int(.6 * len(df)), int(.8 * len(df))])
     return train, validate, test
 
@@ -35,11 +33,17 @@ def save_split_data(split_df: pd.DataFrame, filepath: str):
             "0": [ list of record dictionaries ]
         }
     """
-    records = split_df.to_dict(orient="records")
-    json_output = {"0": records}
+    records = split_df.to_dict(orient="index")
+    for key in records:
+        toRemove = []
+        for keyy in records[key]:
+            if records[key][keyy] == None:
+                toRemove.append(keyy)
+        for keyy in toRemove:
+            del records[key][keyy]
 
     with open(filepath, "w") as f:
-        json.dump(json_output, f, indent=4)
+        json.dump(records, f, indent=4)
 
 
 def main():
