@@ -30,15 +30,6 @@ tasks:
   reference_data: final_phase/reference_data
   scoring_program: scoring_program
   ingestion_program: ingestion_program
-solutions: []
-
-# Sample code submission
-# /!\ Solution is an example submission, NOT the ground truth /!\
-solutions:
-  - index: 0
-    tasks:
-    - 0
-    path: solution/
 
 # There are 2 phases: development phase and final phase
 # Each one is linked to a task
@@ -55,9 +46,6 @@ phases:
   tasks:
   - 0
   solutions: []
-
-# Fact sheets to add more information in the leaderboard
-fact_sheet: {}
 
 # Leaderboard
 leaderboards:
