@@ -66,6 +66,17 @@ def main():
     print('Accuracy: {}'.format(accuracy))
     scores["accuracy"] = accuracy
     
+    # Compute false positives
+    false_positive_count = 0
+    should_not_report_count = 0
+    for i in range(len(y_pred)):
+        if y_pred[i] in [3, 4, 5] and y_test[i] not in [3, 4, 5]:
+            false_positive_count += 1
+        if y_test[i] not in [3,4,5]:
+            should_not_report_count += 1
+
+    scores['false_report_rate'] = false_positive_count / should_not_report_count
+    
     # Get duration
     with open(os.path.join(prediction_dir, 'metadata.json')) as f:
         duration = json.load(f).get('duration', -1)
