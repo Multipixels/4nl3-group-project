@@ -1,3 +1,3 @@
 # Starting Kit
 
-In this starting kit, you will find 
+Please refer to the competition's Codabench's "Get Started" page for details on using these files.
