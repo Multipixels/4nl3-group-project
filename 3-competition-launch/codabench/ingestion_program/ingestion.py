@@ -67,7 +67,7 @@ def main():
     duration = time.time() - start
     print(f'Completed. Total duration: {duration}')
     with open(os.path.join(output_dir, 'metadata.json'), 'w+') as f:
-        json.dump({'duration': duration}, f)
+       json.dump({'duration': duration}, f)
     print('Ingestion program finished. Moving on to scoring')
     print_bar()
 

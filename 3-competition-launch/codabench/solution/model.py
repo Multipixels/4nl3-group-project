@@ -18,4 +18,9 @@ class Model:
 
     # Predict labels.
     def predict(self, X):
-        return np.random.choice(self.labels, size=X.shape[0])
+        predictions = []
+        for game in X:
+            for message in game:
+                if pd.isna(message): break
+                predictions.append(np.random.choice(self.labels))
+        return predictions

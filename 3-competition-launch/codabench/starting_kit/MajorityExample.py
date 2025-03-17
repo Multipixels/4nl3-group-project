@@ -3,6 +3,7 @@
 
 import numpy as np
 from collections import Counter
+import pandas as pd
 
 class Model:
     def __init__(self):
@@ -13,10 +14,16 @@ class Model:
         values = {}
         for game in y:
             for message in y[game]:
-                    if y[game][message]["label"] in values: values[y[game][message]["label"]] += 1
-                    else: values[y[game][message]["label"]] = 1
+                if pd.isna(message): break
+                if message["label"] in values: values[message["label"]] += 1
+                else: values[message["label"]] = 1
         
 
     # Predict labels.
     def predict(self, X):
-        return np.full(shape=X.shape[0], fill_value=self.majority_label)
+        predictions = []
+        for game in X:
+            for message in game:
+                if pd.isna(message): break
+                predictions.append(self.majority_label)
+        return predictions

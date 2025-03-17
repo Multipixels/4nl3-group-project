@@ -29,10 +29,17 @@ def write_file(file, content):
 def get_data():
     """ Get ground truth (y_test) and predictions (y_pred) from the dataset name.
     """
-    y_test = pd.read_json(os.path.join(reference_dir, 'test_output.json'))
+    y_test = pd.read_json(os.path.join(reference_dir, 'test_output.json'), orient="index")
     y_test = np.array(y_test)
     y_pred = np.genfromtxt(os.path.join(prediction_dir, 'result.predict'))
-    return y_test, y_pred
+
+    y_real_test = []
+    for game in y_test:
+        for message in game:
+            if pd.isna(message): break
+            y_real_test.append(int(message["label"]))
+
+    return y_real_test, y_pred
 
 def print_bar():
     """ Display a bar ('----------')
@@ -45,17 +52,19 @@ def main():
     print_bar()
     print('Scoring program.')
     # Initialized detailed results
-    write_file(html_file, '<h1>Detailed results</h1>') # Create the file to give real-time feedback
-    scores = 0
+    # write_file(html_file, '<h1>Detailed results</h1>') # Create the file to give real-time feedback
+    scores = {}
 
     print_bar()
     # Read data
     print('Reading prediction')
     y_test, y_pred = get_data()
     # Compute score
+    print(y_test)
+    print(y_pred)
     accuracy = accuracy_score(y_test, y_pred)
     print('Accuracy: {}'.format(accuracy))
-    scores = accuracy
+    scores["accuracy"] = accuracy
     
     # Get duration
     with open(os.path.join(prediction_dir, 'metadata.json')) as f:
