@@ -18,8 +18,6 @@ for game in data:
     for message in data[game]:
         counts[int(message["label"])] += 1
 
-plt.barh(categories, counts)
+plt.pie(counts, labels=categories)
 plt.title('Message Frequency by Category')
-plt.xlabel('Count')
-plt.ylabel('Category')
 plt.show()
