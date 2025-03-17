@@ -60,14 +60,14 @@ def main():
     X_train_vect, X_test_vect, _ = vectorize_data(X_train, X_test)
     X_train_vect, X_test_vect, _ = vectorize_data(y_train, X_test)
 
-    accuracy_majority, accuracy_random = evaluate_baselines(X_train_vect, X_test_vect, y_train, y_test)
+    # accuracy_majority, accuracy_random = evaluate_baselines(X_train_vect, X_test_vect, y_train, y_test)
     
-    print("Majority Baseline Accuracy:", accuracy_majority)
-    print("Random Baseline Accuracy:", accuracy_random)
+    # print("Majority Baseline Accuracy:", accuracy_majority)
+    # print("Random Baseline Accuracy:", accuracy_random)
 
-    accuracy_lr = train_logistic_regression(
-        X_train_vect, X_test_vect, y_train, y_test)
-    print("Logistic Regression Accuracy:", accuracy_lr)
+    # accuracy_lr = train_logistic_regression(
+    #     X_train_vect, X_test_vect, y_train, y_test)
+    # print("Logistic Regression Accuracy:", accuracy_lr)
 
 
 if __name__ == "__main__":
