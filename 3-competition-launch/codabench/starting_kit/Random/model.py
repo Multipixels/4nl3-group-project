@@ -1,6 +1,3 @@
-# This is a sample code submission.
-# It is a simple machine learning classifier.
-
 import numpy as np
 import pandas as pd
 
