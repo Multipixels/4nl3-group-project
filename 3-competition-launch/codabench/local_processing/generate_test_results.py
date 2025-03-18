@@ -17,7 +17,7 @@ def get_data():
     # Read data
     X_train = pd.read_json("train_input.json", orient="index")
     y_train = pd.read_json('train_output.json', orient="index")
-    X_test = pd.read_json("validate_input.json", orient="index")
+    X_test = pd.read_json("test_input.json", orient="index")
 
     # Convert to numpy arrays
     X_train, y_train, X_test = np.array(X_train), np.array(y_train), np.array(X_test)
@@ -34,6 +34,7 @@ def main():
     print_bar()
     print('Ingestion program.')
     from model import Model # The model submitted by the participant
+    start = time.time()
 
     print_bar()
     # Read data
@@ -49,10 +50,10 @@ def main():
     print('Making predictions')
     y_pred = m.predict(X_test)
     # Save predictions
-    np.savetxt('result.predict', y_pred, fmt='%s')
+    np.savetxt('submit_these_result.predict', y_pred, fmt='%s')
 
     # End
-    print('Ingestion program finished. Moving on to scoring')
+    print('Ingestion program finished.')
     print_bar()
 
 if __name__ == '__main__':

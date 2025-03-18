@@ -31,7 +31,7 @@ def get_data():
     """
     y_test = pd.read_json(os.path.join(reference_dir, 'test_output.json'), orient="index")
     y_test = np.array(y_test)
-    y_pred = np.genfromtxt(os.path.join(prediction_dir, 'result.predict'))
+    y_pred = np.genfromtxt(os.path.join(prediction_dir, 'submit_these_result.predict'))
 
     y_real_test = []
     for game in y_test:
@@ -76,12 +76,6 @@ def main():
             should_not_report_count += 1
 
     scores['false_report_rate'] = false_positive_count / should_not_report_count
-    
-    # Get duration
-    with open(os.path.join(prediction_dir, 'metadata.json')) as f:
-        duration = json.load(f).get('duration', -1)
-
-    scores['duration'] = duration
 
     # Write scores
     print_bar()

@@ -71,12 +71,6 @@ def main():
             should_not_report_count += 1
 
     scores['false_report_rate'] = false_positive_count / should_not_report_count
-    
-    # Get duration
-    with open('metadata.json') as f:
-        duration = json.load(f).get('duration', -1)
-
-    scores['duration'] = duration
 
     # Write scores
     print_bar()

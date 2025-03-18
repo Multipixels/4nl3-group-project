@@ -40,34 +40,6 @@ def print_bar():
 def main():
     """ The ingestion program.
     """
-    print_bar()
-    print('Ingestion program.')
-    from model import Model # The model submitted by the participant
-    start = time.time()
-
-    print_bar()
-    # Read data
-    print('Reading data')
-    X_train, y_train, X_test = get_data()
-    # Initialize model
-    print('Initializing the model')
-    m = Model()
-    # Train model
-    print('Training the model')
-    m.fit(X_train, y_train)
-    # Make predictions
-    print('Making predictions')
-    y_pred = m.predict(X_test)
-    # Save predictions
-    np.savetxt(os.path.join(output_dir, 'result.predict'), y_pred, fmt='%s')
-    duration = time.time() - start
-    print(f'Time elapsed so far: {duration}')
-
-    # End
-    duration = time.time() - start
-    print(f'Completed. Total duration: {duration}')
-    with open(os.path.join(output_dir, 'metadata.json'), 'w+') as f:
-       json.dump({'duration': duration}, f)
     print('Ingestion program finished. Moving on to scoring')
     print_bar()
 
